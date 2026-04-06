@@ -11,14 +11,14 @@ class Command(BaseCommand):
         User = get_user_model()
         # Clear existing data
         User.objects.all().delete()
-        Team.objects.all().delete()
-        Activity.objects.all().delete()
-        Leaderboard.objects.all().delete()
-        Workout.objects.all().delete()
+        octo_models.Team.objects.all().delete()
+        octo_models.Activity.objects.all().delete()
+        octo_models.Leaderboard.objects.all().delete()
+        octo_models.Workout.objects.all().delete()
 
         # Create Teams
-        marvel = Team.objects.create(name='Marvel')
-        dc = Team.objects.create(name='DC')
+        marvel = octo_models.Team.objects.create(name='Marvel')
+        dc = octo_models.Team.objects.create(name='DC')
 
         # Create Users
         users = [
@@ -32,19 +32,19 @@ class Command(BaseCommand):
 
         # Create Activities
         activities = [
-            Activity.objects.create(user=users[0], type='flight', duration=60),
-            Activity.objects.create(user=users[1], type='martial arts', duration=45),
-            Activity.objects.create(user=users[3], type='tech', duration=30),
+            octo_models.Activity.objects.create(user=users[0], type='flight', duration=60),
+            octo_models.Activity.objects.create(user=users[1], type='martial arts', duration=45),
+            octo_models.Activity.objects.create(user=users[3], type='tech', duration=30),
         ]
 
         # Create Workouts
         workouts = [
-            Workout.objects.create(name='Super Strength', description='Strength training for heroes'),
-            Workout.objects.create(name='Agility', description='Agility drills for quick response'),
+            octo_models.Workout.objects.create(name='Super Strength', description='Strength training for heroes'),
+            octo_models.Workout.objects.create(name='Agility', description='Agility drills for quick response'),
         ]
 
         # Create Leaderboard
-        Leaderboard.objects.create(team=marvel, points=300)
-        Leaderboard.objects.create(team=dc, points=250)
+        octo_models.Leaderboard.objects.create(team=marvel, points=300)
+        octo_models.Leaderboard.objects.create(team=dc, points=250)
 
         self.stdout.write(self.style.SUCCESS('octofit_db database populated with test data.'))
